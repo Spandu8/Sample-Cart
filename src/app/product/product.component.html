@@ -1,0 +1,19 @@
+<h2 mat-dialog-title></h2>
+
+<mat-dialog-content >
+  <form class="login-form" [formGroup]="productFormData"  (ngSubmit)="addProduct()">
+    <mat-form-field class="login-form-field">
+      <input type="text" placeholder="Enter Product Name" formControlName="name"  aria-label="Name" matInput>
+    </mat-form-field>
+    <mat-form-field class="login-form-field">
+      <input type="text" placeholder="Enter Amount" formControlName="amount"   aria-label="Password" matInput>
+    </mat-form-field>
+
+
+    <mat-dialog-actions align="center" class="login-btns">
+        <button class="mat-raised-button" (click)="close()" >Close</button>
+        <button class="mat-raised-button mat-primary" type="submit">Save</button>
+    </mat-dialog-actions>
+      </form>
+
+</mat-dialog-content>

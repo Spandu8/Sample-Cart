@@ -1,0 +1,20 @@
+<div class="container">
+  <div>
+    <button (click)="addProductModal()">Add Product</button>
+  </div>
+  <div>
+      <div class="col-md-12">
+          <div class="col-md-3" *ngFor="let product of productList">
+            <form class="login-form" [formGroup]="editProductFormData"  (ngSubmit)="addProduct()">
+
+            <mat-form-field class="login-form-field">
+              <input type="text"  [disabled]="isDisabled" placeholder="Enter Product Name" formControlName="name" [(ngModel)] = "product.name"  aria-label="Name" matInput>
+            </mat-form-field>
+            <mat-form-field class="login-form-field">
+              <input type="text" placeholder="Enter Amount" formControlName="amount" [(ngModel)] = "product.amount" aria-label="Password" matInput>
+            </mat-form-field>
+          </form>
+          </div>
+      </div>
+  </div>
+</div>
