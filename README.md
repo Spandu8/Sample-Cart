@@ -2,6 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.2.
 
+## Installation
+
+Clone the git repository using https or ssh.
+```bash
+$mkdir project
+$cd project
+$ git clone https://github.com/Spandu8/Sample-Cart.git
+$ cd Sample-Cart
+$ npm install
+$ code .
+```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
