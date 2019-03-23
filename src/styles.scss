@@ -20,3 +20,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: red;
   font-size: 12px;
 }
+mat-dialog-content{
+  height: 70%;
+  margin-top: 60px;
+}
+
+mat-dialog-actions{
+  margin-top: 30px;
+}

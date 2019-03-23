@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {ProductComponent} from '../product/product.component';
 import { AuthenticationService } from '../authentication.service';
-import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import {  Observable } from 'rxjs';
+import {MatButtonModule} from '@angular/material/button';
+
 
 
 
@@ -13,31 +16,26 @@ import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
   productList :any = [];
-  editProductFormData: FormGroup;
   isDisabled: boolean = true;
   myForm : NgForm;
+  isLoggedIn$: Observable<boolean>;
+  isAdmin$: Observable<boolean>;
 
-  constructor(public dialog:MatDialog, private authService:AuthenticationService, private fb: FormBuilder,) { }
+
+  constructor(public dialog:MatDialog, private authService:AuthenticationService) { }
 
   ngOnInit() {
-    // this.initializeForm();
+    this.isLoggedIn$ = this.authService.isLoggedIn;
+    this.isAdmin$ = this.authService.getIsAdmin;
+    console.log(this.isAdmin$,'this.isAdmin$')
     this.getProducts();
   }
 
-  // initializeForm() {
-  //     this.editProductFormData = this.fb.group({
-  //       name: [''],
-  //       amount: ['']
-  //     });
-  // }
 
   addProductModal():void {
-
-    const dialogConfig = new MatDialogConfig();
-
+   const dialogConfig = new MatDialogConfig();
    dialogConfig.disableClose = true;
    dialogConfig.autoFocus = true;
-
    dialogConfig.width = '600px';
    dialogConfig.height = '400px';
    const dialogRef = this.dialog.open(ProductComponent, dialogConfig);
@@ -50,6 +48,17 @@ export class HomeComponent implements OnInit {
  );
  }
 
+  addToCart(product) {
+    console.log(product,'ouu')
+    const info = {
+      productId: product._id,
+      userId: JSON.parse(sessionStorage.getItem('user'))._id
+    }
+    this.authService.addTocart(info).subscribe((response) => {
+
+    })
+    console.log("add to cart", product);
+  }
 
  getProducts(){
    this.productList = [];
@@ -89,7 +98,7 @@ export class HomeComponent implements OnInit {
    const productInfo = {
      amount: product.amount,
      name: product.name,
-     _id: productInfo._id
+     _id: product._id
    }
    this.authService.updateProduct(productInfo).subscribe((res)=>{
      console.log("updated");

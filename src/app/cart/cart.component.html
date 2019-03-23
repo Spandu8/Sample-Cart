@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="cart-section">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>AMount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of cartList ">
+        <td>{{list.name}}</td>
+        <td>{{list.amount}}</td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td>{{totalAmount}}</td>
+
+      </tr>
+    </tbody>
+
+  </table>
+</div>
+
+</div>

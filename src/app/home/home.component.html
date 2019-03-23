@@ -1,11 +1,12 @@
 <div class="container">
   <div class="product-header">
-    <button (click)="addProductModal()">Add Product</button>
+    <button *ngIf="isAdmin$.source.value" mat-flat-button color="primary" (click)="addProductModal()">Add Product</button>
+    <p *ngIf="!isAdmin$.source.value">Product Details<p>
   </div>
   <div class="product-section">
       <div class="row">
           <div class="col-4 product-card" *ngFor="let product of productList">
-            <form class="login-form "   #myform="ngForm"  (ngSubmit)="updateProduct(product)">
+            <form class="login-form "   #myform="ngForm"  >
 
             <mat-form-field class="login-form-field">
               <input type="text" [disabled]="product.isDisabled"  name="product name" class="form-input" placeholder="Enter Product Name"  [(ngModel)] = "product.name"  aria-label="Name" matInput>
@@ -13,13 +14,18 @@
             <mat-form-field class="login-form-field">
               <input type="text" [disabled]="product.isDisabled" placeholder="Enter Amount"name="amount" class="form-input"  [(ngModel)] = "product.amount" aria-label="Password" matInput>
             </mat-form-field>
-            <div *ngIf="product.isDisabled">
-              <button type="button" (click)="enableEdit(product)">Edit</button>
+            <div *ngIf="isAdmin$.source.value">
+                <div *ngIf="product.isDisabled">
+                  <button type="button" mat-flat-button color="primary" (click)="enableEdit(product)">Edit</button>
+                </div>
+                <div *ngIf="!product.isDisabled">
+                  <button (click)="updateProduct(product)" mat-flat-button color="primary" type="submit">Submit</button>
+                  <button (click)="cancelEdit(product)"mat-flat-button  type="button">Cancel</button>
+              </div>
             </div>
-            <div *ngIf="!product.isDisabled">
-              <button type="submit">Submit</button>
-              <button (click)="cancelEdit(product)" type="button">Cancel</button>
-          </div>
+            <div *ngIf="!isAdmin$.source.value">
+              <button (click)="addToCart(product)" mat-flat-button color="primary" type="submit">Add to cart</button>
+            </div>
           </form>
           </div>
       </div>

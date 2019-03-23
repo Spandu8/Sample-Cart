@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {MatDialogModule, MatFormFieldModule, MatInputModule} from "@angular/material";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -13,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductComponent } from './product/product.component';
+import { CartComponent } from './cart/cart.component';
 
 
 
@@ -21,7 +23,8 @@ import { ProductComponent } from './product/product.component';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    ProductComponent
+    ProductComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { ProductComponent } from './product/product.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule
     // HttpClient
   ],
   providers: [],

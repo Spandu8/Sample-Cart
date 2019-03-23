@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   isError: boolean = false;
   constructor(private router: Router, public dialogRef: MatDialogRef<LoginComponent>,
     @Inject( MAT_DIALOG_DATA) data, private authService: AuthenticationService, private fb: FormBuilder) {
-        console.log(data,'data');
    }
 
 
@@ -48,6 +47,16 @@ export class LoginComponent implements OnInit {
 
       }else{
         this.isError = false;
+        sessionStorage.setItem('isAdmin', response.isAdmin);
+        sessionStorage.setItem('isLoggedIn','true');
+        sessionStorage.setItem('user', JSON.stringify(response));
+
+        if(response.isAdmin) {
+          this.authService.setIsAdmin(true);
+        }else{
+          this.authService.setIsAdmin(false);
+        }
+        this.authService.setIsLoggedIn(true);
         this.router.navigate(['/home']);
         this.close();
 
