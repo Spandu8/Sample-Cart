@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.isAdmin$ = this.authService.getIsAdmin;
-    console.log(this.isAdmin$,'this.isAdmin$')
     this.getProducts();
   }
 
@@ -43,36 +42,29 @@ export class HomeComponent implements OnInit {
    dialogRef.afterClosed().subscribe(
      data => {
        this.getProducts();
-       console.log("Dialog output:", data)
      }
  );
  }
 
   addToCart(product) {
-    console.log(product,'ouu')
     const info = {
       productId: product._id,
       userId: JSON.parse(sessionStorage.getItem('user'))._id
     }
     this.authService.addTocart(info).subscribe((response) => {
-
+        console.log("added to cart")
     })
-    console.log("add to cart", product);
   }
 
  getProducts(){
    this.productList = [];
    this.authService.getProducts().subscribe((response) => {
      response.forEach((list)=> {
-       console.log(list,'list')
        list.isDisabled= true;
        this.productList.push(list);
 
      })
-     console.log(this.productList,'response');
-
    },(error)=> {
-     console.log(error,'error')
    })
 
  }
@@ -85,7 +77,6 @@ export class HomeComponent implements OnInit {
   }
 
   cancelEdit(product){
-    console.log(product,'here')
     this.productList.forEach((list)=>{
       if(list._id === product._id){
         list.isDisabled = true;
@@ -94,14 +85,12 @@ export class HomeComponent implements OnInit {
   }
 
  updateProduct(product){
-   console.log(product,'value');
    const productInfo = {
      amount: product.amount,
      name: product.name,
      _id: product._id
    }
    this.authService.updateProduct(productInfo).subscribe((res)=>{
-     console.log("updated");
      this.getProducts();
    })
  }

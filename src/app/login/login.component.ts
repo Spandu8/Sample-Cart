@@ -34,8 +34,6 @@ export class LoginComponent implements OnInit {
     }
 
   onSubmit() {
-
-    console.log(this.formData,'data')
     const user = {
       userName: this.formData.value.userName,
       password: this.formData.value.password
@@ -61,10 +59,7 @@ export class LoginComponent implements OnInit {
         this.close();
 
       }
-
-      console.log(response,'response');
     },(error) => {
-      console.log(error,'error')
     });
   }
 

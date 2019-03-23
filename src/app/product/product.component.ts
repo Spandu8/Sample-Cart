@@ -12,7 +12,6 @@ export class ProductComponent implements OnInit {
 productFormData: FormGroup;
   constructor( public dialogRef: MatDialogRef<ProductComponent>,
     @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder, private authService:AuthenticationService) {
-        console.log(data,'data');
    }
 
    ngOnInit() {
@@ -34,7 +33,6 @@ productFormData: FormGroup;
      this.authService.addProduct(productInfo).subscribe((response) => {
        this.close();
      },(error)=> {
-       console.log(error,'error')
      })
 
    }

@@ -52,7 +52,6 @@ export class AuthenticationService {
 
   }
   addTocart(info): Observable<any> {
-    console.log("info", info);
     return this.http.post('http://192.168.43.188:3402/api/addToCart', info);
   }
 

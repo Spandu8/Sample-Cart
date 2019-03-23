@@ -20,13 +20,8 @@ export class AppComponent implements OnInit{
   constructor(public dialog:MatDialog, private authService: AuthenticationService) { }
 
    ngOnInit() {
-     console.log("here", (JSON.parse(sessionStorage.getItem('user'))));
-
      this.isLoggedIn$ = this.authService.isLoggedIn;
      this.isAdmin$ = this.authService.getIsAdmin;
-     console.log(this.isLoggedIn$,'this.isLoggedIn$')
-
-
    }
 
   logout(){
