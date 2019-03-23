@@ -20,6 +20,8 @@ export class AuthenticationService {
 
   getProducts(): Observable<any> {
     return this.http.get('http://192.168.43.188:3402/api/getProducts');
-
+  }
+  updateProduct(productInfo): Observable<any> {
+    return this.http.put('http://192.168.43.188:3402/api/updateProduct', productInfo);
   }
 }

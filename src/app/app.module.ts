@@ -32,7 +32,7 @@ import { ProductComponent } from './product/product.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    HttpClientModule
     // HttpClient
   ],
   providers: [],
