@@ -8,5 +8,23 @@
 
 .landing-page img {
   width: 100%;
-  
+
+}
+
+.cart {
+    position: relative;
+}
+
+.cart span{
+  position: absolute;
+  background: #fff;
+  width: 20px;
+  clip: unset;
+  height: 20px;
+  border-radius: 50%;
+  top: 0px;
+  right: -6px;
+  color: #000000;
+  font-size: 13px;
+  text-align: center;
 }

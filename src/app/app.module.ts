@@ -4,9 +4,7 @@ import {MatDialogModule, MatFormFieldModule, MatInputModule} from "@angular/mate
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatButtonModule} from '@angular/material/button';
-
-
-
+import { GrowlModule } from 'ngx-growl';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductComponent } from './product/product.component';
 import { CartComponent } from './cart/cart.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -24,7 +23,8 @@ import { CartComponent } from './cart/cart.component';
     HomeComponent,
     LoginComponent,
     ProductComponent,
-    CartComponent
+    CartComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -36,11 +36,11 @@ import { CartComponent } from './cart/cart.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatButtonModule
-    // HttpClient
+    MatButtonModule,
+    GrowlModule.forRoot({ maxMessages: 1, displayTimeMs: 5000 }),
   ],
   providers: [],
-  entryComponents: [LoginComponent, ProductComponent],
+  entryComponents: [LoginComponent, ProductComponent, RegisterComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

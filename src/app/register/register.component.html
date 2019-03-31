@@ -1,0 +1,24 @@
+<h2 mat-dialog-title></h2>
+
+<mat-dialog-content >
+  <form class="login-form" [formGroup]="registerFormData"  (ngSubmit)="registerUser()">
+    <mat-form-field class="login-form-field">
+      <input type="text" placeholder="Enter User Name" required formControlName="userName"  aria-label="Name" matInput>
+    </mat-form-field>
+    <mat-form-field class="login-form-field">
+      <input type="email" placeholder="Enter Email" required formControlName="email"   aria-label="email" matInput>
+    </mat-form-field>
+    <mat-form-field class="login-form-field">
+      <input type="password" placeholder="Enter Password" required formControlName="password"   aria-label="password" matInput>
+    </mat-form-field>
+    <div *ngIf="errMessage">
+      <p class="error">{{errMessage}}</p>
+    </div>
+
+    <mat-dialog-actions align="center" class="login-btns">
+        <button class="mat-raised-button" type="button" (click)="close()" >Close</button>
+        <button class="mat-raised-button mat-primary" type="submit" [disabled]="!registerFormData.valid" >Save</button>
+    </mat-dialog-actions>
+      </form>
+
+</mat-dialog-content>

@@ -21,10 +21,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-size: 12px;
 }
 mat-dialog-content{
-  height: 70%;
+  height: 85%;
   margin-top: 60px;
 }
 
 mat-dialog-actions{
   margin-top: 30px;
+}
+ngx-growl{
+    z-index: 99999 !important;
 }

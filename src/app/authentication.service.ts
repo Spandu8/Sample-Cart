@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable , Subject} from 'rxjs';
 import { HttpClient} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,10 @@ import { HttpClient} from '@angular/common/http';
 export class AuthenticationService {
 
   constructor(private http: HttpClient, private router: Router) { }
+
+  private cartSubject = new Subject<CartState>();
+   CartState = this.cartSubject.asObservable();
+
   private loggedIn = new BehaviorSubject<boolean>(
     JSON.parse(sessionStorage.getItem('isLoggedIn')));
 
@@ -39,11 +43,13 @@ export class AuthenticationService {
   }
 
   getProducts(): Observable<any> {
-    return this.http.get('http://192.168.43.188:3402/api/getProducts');
+    return this.http.get('http://192.168.43.188:3402/api/getProducts?'+'userId='+JSON.parse(sessionStorage.getItem('user'))._id);
   }
+
   updateProduct(productInfo): Observable<any> {
     return this.http.put('http://192.168.43.188:3402/api/updateProduct', productInfo);
   }
+
   logOut(){
       sessionStorage.clear();
       this.loggedIn.next(false);
@@ -52,10 +58,17 @@ export class AuthenticationService {
 
   }
   addTocart(info): Observable<any> {
-    return this.http.post('http://192.168.43.188:3402/api/addToCart', info);
+    return this.http.post('http://192.168.43.188:3402/api/addToCart', info).subscribe((res) => {
+      console.log(res,'res');
+      this.cartSubject.next(<CartState>{loaded: true, products:  info});
+    })
   }
 
   getCartDetails(): Observable<any> {
     return this.http.get('http://192.168.43.188:3402/api/getCartDetails?'+'id='+JSON.parse(sessionStorage.getItem('user'))._id);
+  }
+
+  registerUser(user): Observable<any> {
+    return this.http.post('http://192.168.43.188:3402/api/user/register', user);
   }
 }

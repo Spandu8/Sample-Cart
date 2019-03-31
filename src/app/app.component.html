@@ -8,10 +8,13 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ml-auto" *ngIf="!isLoggedIn$.source.value">
       <a class="nav-item nav-link" (click)="openLoginDialog()">Login<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" (click)="openRegisterDialog()">Register<span class="sr-only"></span></a>
     </div>
     <div class="navbar-nav ml-auto" *ngIf="isLoggedIn$.source.value">
         <a class="nav-item nav-link" *ngIf="!isAdmin$.source.value" routerLink="/home">Home<span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link"*ngIf="!isAdmin$.source.value" routerLink="/cart">Cart<span class="sr-only"></span></a>
+        <a class="nav-item nav-link cart"*ngIf="!isAdmin$.source.value" routerLink="/cart">Cart
+          <span class="sr-only">{{cartLength}}</span>
+        </a>
         <a class="nav-item nav-link" (click)="logout()">Logout<span class="sr-only"></span></a>
     </div>
   </div>
@@ -21,5 +24,5 @@
 </div>
 
 
-
+<ngx-growl></ngx-growl>
 <router-outlet></router-outlet>

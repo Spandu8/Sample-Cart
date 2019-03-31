@@ -1,10 +1,10 @@
 <mat-dialog-content >
   <form class="login-form" [formGroup]="formData"  (ngSubmit)="onSubmit()">
     <mat-form-field class="login-form-field">
-      <input type="text" placeholder="Enter Name" formControlName="userName"  aria-label="Name" matInput>
+      <input type="text" placeholder="Enter Name" required formControlName="userName"  aria-label="Name" matInput>
     </mat-form-field>
     <mat-form-field class="login-form-field">
-      <input type="text" placeholder="Password" formControlName="password"   aria-label="Password" matInput>
+      <input type="password" placeholder="Password" required formControlName="password"   aria-label="Password" matInput>
     </mat-form-field>
 
     <div *ngIf="isError">
@@ -12,8 +12,8 @@
     </div>
 
     <mat-dialog-actions align="center" class="login-btns">
-        <button class="mat-raised-button" (click)="close()" >Close</button>
-        <button class="mat-raised-button mat-primary" type="submit">Save</button>
+        <button class="mat-raised-button" type="button" (click)="close()" >Close</button>
+        <button class="mat-raised-button mat-primary" type="submit" [disabled]="!formData.valid">Save</button>
     </mat-dialog-actions>
       </form>
 

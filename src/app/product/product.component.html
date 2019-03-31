@@ -3,16 +3,16 @@
 <mat-dialog-content >
   <form class="login-form" [formGroup]="productFormData"  (ngSubmit)="addProduct()">
     <mat-form-field class="login-form-field">
-      <input type="text" placeholder="Enter Product Name" formControlName="name"  aria-label="Name" matInput>
+      <input type="text" placeholder="Enter Product Name" required formControlName="name"  aria-label="Name" matInput>
     </mat-form-field>
     <mat-form-field class="login-form-field">
-      <input type="text" placeholder="Enter Amount" formControlName="amount"   aria-label="Password" matInput>
+      <input type="number" placeholder="Enter Amount" required formControlName="amount"   aria-label="Password" matInput>
     </mat-form-field>
 
 
     <mat-dialog-actions align="center" class="login-btns">
-        <button class="mat-raised-button" (click)="close()" >Close</button>
-        <button class="mat-raised-button mat-primary" type="submit">Save</button>
+        <button class="mat-raised-button" type="button" (click)="close()" >Close</button>
+        <button class="mat-raised-button mat-primary" [disabled]="!productFormData.valid" type="submit">Save</button>
     </mat-dialog-actions>
       </form>
 

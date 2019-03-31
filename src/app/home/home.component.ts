@@ -28,6 +28,10 @@ export class HomeComponent implements OnInit {
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.isAdmin$ = this.authService.getIsAdmin;
     this.getProducts();
+    this.subscription = this.authService.CartState
+        .subscribe((state : CartState) => {
+          this.getProducts();
+        });
   }
 
 
@@ -51,9 +55,7 @@ export class HomeComponent implements OnInit {
       productId: product._id,
       userId: JSON.parse(sessionStorage.getItem('user'))._id
     }
-    this.authService.addTocart(info).subscribe((response) => {
-        console.log("added to cart")
-    })
+    this.authService.addTocart(info);
   }
 
  getProducts(){
