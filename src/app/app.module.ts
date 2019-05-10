@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductComponent } from './product/product.component';
 import { CartComponent } from './cart/cart.component';
 import { RegisterComponent } from './register/register.component';
+// import {AppConfig} from '../config/config';
 
 
 
@@ -37,8 +38,12 @@ import { RegisterComponent } from './register/register.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatButtonModule,
+    // AppConfig,
     GrowlModule.forRoot({ maxMessages: 1, displayTimeMs: 5000 }),
   ],
+  // exports: [
+  //   AppConfig
+  // ],
   providers: [],
   entryComponents: [LoginComponent, ProductComponent, RegisterComponent],
   bootstrap: [AppComponent]

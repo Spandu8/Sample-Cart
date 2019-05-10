@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable , Subject} from 'rxjs';
 import { HttpClient} from '@angular/common/http';
+import { Config } from '../config/config';
 @Injectable({
   providedIn: 'root'
 })
@@ -35,19 +36,19 @@ export class AuthenticationService {
   }
 
   login(userInfo): Observable<any> {
-    return this.http.post('http://192.168.43.188:3402/api/user/login', userInfo);
+    return this.http.post( Config.apiRoute +'/api/user/login', userInfo);
   }
 
   addProduct(productInfo): Observable<any> {
-    return this.http.post('http://192.168.43.188:3402/api/addProduct', productInfo);
+    return this.http.post( Config.apiRoute + '/api/addProduct', productInfo);
   }
 
   getProducts(): Observable<any> {
-    return this.http.get('http://192.168.43.188:3402/api/getProducts?'+'userId='+JSON.parse(sessionStorage.getItem('user'))._id);
+    return this.http.get( Config.apiRoute + '/api/getProducts?'+'userId='+JSON.parse(sessionStorage.getItem('user'))._id);
   }
 
   updateProduct(productInfo): Observable<any> {
-    return this.http.put('http://192.168.43.188:3402/api/updateProduct', productInfo);
+    return this.http.put( Config.apiRoute + '/api/updateProduct', productInfo);
   }
 
   logOut(){
@@ -58,17 +59,21 @@ export class AuthenticationService {
 
   }
   addTocart(info): Observable<any> {
-    return this.http.post('http://192.168.43.188:3402/api/addToCart', info).subscribe((res) => {
+    return this.http.post( Config.apiRoute  + '/api/addToCart', info).subscribe((res) => {
       console.log(res,'res');
       this.cartSubject.next(<CartState>{loaded: true, products:  info});
     })
   }
 
   getCartDetails(): Observable<any> {
-    return this.http.get('http://192.168.43.188:3402/api/getCartDetails?'+'id='+JSON.parse(sessionStorage.getItem('user'))._id);
+    return this.http.get( Config.apiRoute + '/api/getCartDetails?'+'id='+JSON.parse(sessionStorage.getItem('user'))._id);
   }
 
   registerUser(user): Observable<any> {
-    return this.http.post('http://192.168.43.188:3402/api/user/register', user);
+    return this.http.post( Config.apiRoute + '/api/user/register', user);
+  }
+
+  deleteProduct(productId): Observable<any> {
+    return this.http.delete(Config.apiRoute + '/api/deleteProduct?' + 'id=' + productId);
   }
 }

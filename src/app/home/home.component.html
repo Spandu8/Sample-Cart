@@ -17,6 +17,7 @@
             <div *ngIf="isAdmin$.source.value">
                 <div *ngIf="product.isDisabled">
                   <button type="button" mat-flat-button color="primary" (click)="enableEdit(product)">Edit</button>
+                  <button type="button" mat-flat-button color="warn" (click)="deleteProduct(product)">Delete</button>
                 </div>
                 <div *ngIf="!product.isDisabled">
                   <button (click)="updateProduct(product)" mat-flat-button color="primary" [disabled]="!ngForm.valid" type="submit">Submit</button>

@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.isAdmin$ = this.authService.getIsAdmin;
     this.getProducts();
-    this.subscription = this.authService.CartState
+    this.authService.CartState
         .subscribe((state : CartState) => {
           this.getProducts();
         });
@@ -93,6 +93,12 @@ export class HomeComponent implements OnInit {
      _id: product._id
    }
    this.authService.updateProduct(productInfo).subscribe((res)=>{
+     this.getProducts();
+   })
+ }
+
+ deleteProduct(product) {
+   this.authService.deleteProduct(product._id).subscribe((res) => {
      this.getProducts();
    })
  }
