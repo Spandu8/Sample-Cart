@@ -16,13 +16,14 @@ export class AppComponent implements OnInit{
   title = 'angular';
   isLoggedIn$: Observable<boolean>;
   isAdmin$: Observable<boolean>;
+  cartLength: any = [];
 
   constructor(public dialog:MatDialog, private authService: AuthenticationService) { }
 
    ngOnInit() {
      this.isLoggedIn$ = this.authService.isLoggedIn;
      this.isAdmin$ = this.authService.getIsAdmin;
-     this.subscription = this.authService.CartState
+     this.authService.CartState
          .subscribe((state : CartState) => {
             this.getCart();
      });
