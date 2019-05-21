@@ -20,16 +20,21 @@ export class AppComponent implements OnInit{
 
   constructor(public dialog:MatDialog, private authService: AuthenticationService) { }
 
-   ngOnInit() {
-     this.isLoggedIn$ = this.authService.isLoggedIn;
+  ngOnInit() {
+     this.isLoggedIn$ = this.authService.isLoggedIn;  
      this.isAdmin$ = this.authService.getIsAdmin;
      this.authService.CartState
-         .subscribe((state : CartState) => {
+         .subscribe((state) => {
             this.getCart();
      });
-     if(this.isLoggedIn$.source.value) {
-       this.getCart();
-     }     
+
+     console.log(this.isLoggedIn$,'this.isLoggedIn$')
+     this.isLoggedIn$.subscribe(val => {
+       if(val) {
+        this.getCart();
+      }  
+     })
+      
    }
 
   logout(){
