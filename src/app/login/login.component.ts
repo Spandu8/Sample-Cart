@@ -34,27 +34,15 @@ export class LoginComponent implements OnInit {
     }
 
   onSubmit() {
-    // const user = {
-    //   userName: this.formData.value,
-    //   password: this.formData.value
-    // }
     this.authService.login(this.formData.value).subscribe((response) => {
       if(response.code === 403){
         this.isError = true;
         this.erroMessage = response.message;
 
       }else{
-        this.isError = false;
-        sessionStorage.setItem('isAdmin', response.isAdmin);
-        sessionStorage.setItem('isLoggedIn','true');
+        this.isError = false; 
         sessionStorage.setItem('user', JSON.stringify(response));
-
-        if(response.isAdmin) {
-          this.authService.setIsAdmin(true);
-        }else{
-          this.authService.setIsAdmin(false);
-        }
-        this.authService.setIsLoggedIn(true);
+        this.authService.setUserDetails(response);
         this.router.navigate(['/home']);
         this.close();
 
