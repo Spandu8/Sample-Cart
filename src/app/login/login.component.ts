@@ -34,11 +34,11 @@ export class LoginComponent implements OnInit {
     }
 
   onSubmit() {
-    const user = {
-      userName: this.formData.value.userName,
-      password: this.formData.value.password
-    }
-    this.authService.login(user).subscribe((response) => {
+    // const user = {
+    //   userName: this.formData.value,
+    //   password: this.formData.value
+    // }
+    this.authService.login(this.formData.value).subscribe((response) => {
       if(response.code === 403){
         this.isError = true;
         this.erroMessage = response.message;

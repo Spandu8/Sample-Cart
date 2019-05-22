@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable , Subject} from 'rxjs';
+import { BehaviorSubject, Observable , Subject , of} from 'rxjs';
 import { HttpClient} from '@angular/common/http';
 import { Config } from '../config/config';
+import { User } from '../config/user';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,14 +11,14 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  private cartSubject = new Subject<CartState>();
+  private cartSubject = new Subject();
    CartState = this.cartSubject.asObservable();
 
   private loggedIn = new BehaviorSubject<boolean>(
-    JSON.parse(sessionStorage.getItem('isLoggedIn')));
+    JSON.parse(sessionStorage.getItem('isLoggedIn')) ? JSON.parse(sessionStorage.getItem('isLoggedIn')) : false);
 
   private isAdmins = new BehaviorSubject<boolean>(
-    JSON.parse(sessionStorage.getItem('isAdmin')));
+    JSON.parse(sessionStorage.getItem('isAdmin')) ? JSON.parse(sessionStorage.getItem('isAdmin')) : false);
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
@@ -35,7 +36,8 @@ export class AuthenticationService {
   this.isAdmins.next(flag);
   }
 
-  login(userInfo): Observable<any> {
+  login(userInfo: User): Observable<any> {
+    console.log(userInfo,'userInfo')
     return this.http.post( Config.apiRoute +'/api/user/login', userInfo);
   }
 
@@ -59,10 +61,15 @@ export class AuthenticationService {
 
   }
   addTocart(info): Observable<any> {
-    return this.http.post( Config.apiRoute  + '/api/addToCart', info).subscribe((res) => {
-      console.log(res,'res');
-      this.cartSubject.next(<CartState>{loaded: true, products:  info});
-    })
+     return Observable.create(obs=>{
+      this.http.post( Config.apiRoute  + '/api/addToCart', info).subscribe((res) => {
+        console.log(res,'res');
+        this.cartSubject.next(info);
+        obs.next(res);
+        obs.complete();
+      })
+     });
+    
   }
 
   getCartDetails(): Observable<any> {
