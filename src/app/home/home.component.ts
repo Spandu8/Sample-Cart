@@ -18,15 +18,12 @@ export class HomeComponent implements OnInit {
   productList :any = [];
   isDisabled: boolean = true;
   myForm : NgForm;
-  isLoggedIn$: Observable<boolean>;
-  isAdmin$: Observable<boolean>;
-
+  user$: Observable<any>;
 
   constructor(public dialog:MatDialog, private authService:AuthenticationService) { }
 
   ngOnInit() {
-    this.isLoggedIn$ = this.authService.isLoggedIn;
-    this.isAdmin$ = this.authService.getIsAdmin;
+    this.user$ = this.authService.getUserDetails;
     this.getProducts();
     this.authService.CartState
         .subscribe((state) => {

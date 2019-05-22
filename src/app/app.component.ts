@@ -14,27 +14,22 @@ import {  Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit{
   title = 'angular';
-  isLoggedIn$: Observable<boolean>;
-  isAdmin$: Observable<boolean>;
   cartLength: any = [];
+  user$: Observable<any>;
 
   constructor(public dialog:MatDialog, private authService: AuthenticationService) { }
 
-  ngOnInit() {
-     this.isLoggedIn$ = this.authService.isLoggedIn;  
-     this.isAdmin$ = this.authService.getIsAdmin;
+  ngOnInit() {    
+     this.user$ = this.authService.getUserDetails;
+     this.user$.subscribe(val => {
+       if(val) {
+          this.getCart();
+        }  
+     });
      this.authService.CartState
          .subscribe((state) => {
             this.getCart();
      });
-
-     console.log(this.isLoggedIn$,'this.isLoggedIn$')
-     this.isLoggedIn$.subscribe(val => {
-       if(val) {
-        this.getCart();
-      }  
-     })
-      
    }
 
   logout(){
