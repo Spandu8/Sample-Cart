@@ -1,0 +1,52 @@
+.chat-component{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 17%;
+}
+
+.chat-body {
+    min-height: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.chat-body::-webkit-scrollbar {
+    width: 8px;
+    height: 4px;
+  }
+
+.chat-body::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+  }
+
+.chat-text-field {
+    background: #ccc;
+    padding: 10px;
+    border-radius: 3%;
+}
+
+.sent-box{
+    margin-left: 20%;
+}
+
+.receive-box {
+    margin-right: 20%;
+}
+
+.chat-form .mat-form-field {
+    width:90%;
+}
+
+.chat-box {
+    margin-bottom: 10px;
+}
+
+.chat-text-field  p {
+    margin: 0;
+}
+
+.chat-text-field p:last-child{
+    text-align: right;
+}

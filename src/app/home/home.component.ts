@@ -4,9 +4,6 @@ import {ProductComponent} from '../product/product.component';
 import { AuthenticationService } from '../authentication.service';
 import { NgForm } from '@angular/forms';
 import {  Observable } from 'rxjs';
-import {MatButtonModule} from '@angular/material/button';
-
-
 
 
 @Component({
@@ -19,8 +16,11 @@ export class HomeComponent implements OnInit {
   isDisabled: boolean = true;
   myForm : NgForm;
   user$: Observable<any>;
-
-  constructor(public dialog:MatDialog, private authService:AuthenticationService) { }
+  messageText: string;
+  messages: Array<any>;
+  constructor(public dialog:MatDialog, private authService:AuthenticationService) {
+    
+   }
 
   ngOnInit() {
     this.user$ = this.authService.getUserDetails;
@@ -29,8 +29,8 @@ export class HomeComponent implements OnInit {
         .subscribe((state) => {
           this.getProducts();
         });
-  }
 
+      }
 
   addProductModal():void {
    const dialogConfig = new MatDialogConfig();
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
      data => {
        this.getProducts();
      }
- );
+  );
  }
 
   addToCart(product) {

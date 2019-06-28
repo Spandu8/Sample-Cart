@@ -8,13 +8,21 @@ import { User } from '../config/user';
   providedIn: 'root'
 })
 export class AuthenticationService {
-
-  constructor(private http: HttpClient, private router: Router) { }
+   Data = {
+    userId: ''
+  }
+  constructor(private http: HttpClient, private router: Router) {
+    
+   }
 
   private cartSubject = new Subject();
    CartState = this.cartSubject.asObservable();
 
-  private user = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('user')))
+  private user = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('user')));
+
+
+  private notificationSubject = new Subject();
+   Notification = this.notificationSubject.asObservable();
 
   setUserDetails(info) {
     this.user.next(info);
@@ -85,5 +93,9 @@ export class AuthenticationService {
       }
     } 
     );
+  }
+
+  sendNotifications(data) {
+    this.notificationSubject.next(data);
   }
 }

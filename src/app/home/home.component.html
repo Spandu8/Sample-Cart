@@ -6,7 +6,7 @@
   <div class="product-section">
       <div class="row">
           <div class="col-4 product-card" *ngFor="let product of productList">
-            <form class="login-form " #myform="ngForm"  >
+            <form class="login-form " #myform="ngForm" >
 
             <mat-form-field class="login-form-field">
               <input type="text" [disabled]="product.isDisabled" required name="product name" class="form-input" placeholder="Enter Product Name"  [(ngModel)] = "product.name"  aria-label="Name" matInput>
@@ -29,6 +29,7 @@
             </div>
           </form>
           </div>
-      </div>
+      </div> 
+
   </div>
 </div>

@@ -2,27 +2,56 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" routerLink="#">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-   aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed">
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
+    (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto" *ngIf="!(user$ | async) ">
-      <a class="nav-item nav-link" (click)="openLoginDialog()">Login<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" (click)="openRegisterDialog()">Register<span class="sr-only"></span></a>
-    </div>
-    <div class="navbar-nav ml-auto" *ngIf="user$ | async">
-        <a class="nav-item nav-link" *ngIf="!((user$ | async)?.isAdmin)" routerLink="/home">Home<span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link cart" *ngIf="!((user$ | async)?.isAdmin)" routerLink="/cart">Cart
-          <span class="sr-only">{{cartLength}}</span>
+    <ul class="navbar-nav ml-auto" *ngIf="!(user$ | async) ">
+      <li class="nav-item ">
+        <a class="nav-link" (click)="openLoginDialog()">Login</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" (click)="openRegisterDialog()">Register</a>
+      </li>
+
+    </ul>
+    <ul class="navbar-nav ml-auto" *ngIf="user$ | async">
+      <li class="nav-item" *ngIf="!((user$ | async)?.isAdmin)">
+        <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" *ngIf="!((user$ | async)?.isAdmin)">
+        <a class="nav-link" routerLink="/cart">
+          <span matBadge="{{cartLength}}" matBadgeColor="accent" matBadgeOverlap="false">Cart</span>
         </a>
-        <a class="nav-item nav-link" (click)="logout()">Logout<span class="sr-only"></span></a>
-    </div>
+      </li>
+      <li class="nav-item" *ngIf="(user$ | async)?.isAdmin">
+        <a class="nav-link" mat-button [matMenuTriggerFor]="menu">
+          <span matBadge="{{notifications.length}}" matBadgeColor="accent" matBadgeOverlap="false">Notifications</span>
+        </a>
+        <mat-menu #menu="matMenu" class="mat-menu">
+          <div *ngFor="let message of notifications" mat-menu-item>
+            <div class="notifications-row" (click)="showChatBox(message)">
+              <i class="fa fa-comments" aria-hidden="true"></i>
+              <div class="mesg-section">
+                <p class="message">{{message.message}}</p>
+                <p class="userName">{{message.userName}}</p>
+              </div>
+            </div>
+          </div>
+        </mat-menu>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link cart" (click)="logout()">Logout</a>
+      </li>
+
+    </ul>
   </div>
 </nav>
 <div class="landing-page" *ngIf="!(user$ | async)">
-  <img  src="assets/images/image.jpeg"/>
+  <img src="assets/images/image.jpeg" />
 </div>
 
-
+<app-chat *ngIf="(user$ | async)" [showChat]="showChat" [receiverId]="receiverId" [senderId]="senderId"></app-chat>
 <ngx-growl></ngx-growl>
 <router-outlet></router-outlet>
