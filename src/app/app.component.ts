@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthenticationService } from './authentication.service';
 import {  Observable } from 'rxjs';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -15,14 +16,18 @@ import {  Observable } from 'rxjs';
 export class AppComponent implements OnInit{
   title = 'angular';
   cartLength: any = [];
+  notifications: any = [];
   user$: Observable<any>;
-
+  showChat: boolean = false;
+  receiverId: any = '';
+  senderId: any = '';
   constructor(public dialog:MatDialog, private authService: AuthenticationService) { }
 
   ngOnInit() {    
      this.user$ = this.authService.getUserDetails;
      this.user$.subscribe(val => {
-       if(val) {
+     this.showChat = val.isAdmin ? false : true;
+      if(val) {
           this.getCart();
         }  
      });
@@ -30,6 +35,14 @@ export class AppComponent implements OnInit{
          .subscribe((state) => {
             this.getCart();
      });
+     this.authService.Notification.subscribe((data) => {     
+     let isIdexist = this.notifications.findIndex(val => val.senderId === data.senderId);
+      if(isIdexist!= -1) {
+          this.notifications[isIdexist] = data;
+      } else {
+        this.notifications.push(data);
+      }        
+     })
    }
 
   logout(){
@@ -40,6 +53,12 @@ export class AppComponent implements OnInit{
       this.authService.getCartDetails().subscribe((res) => {
             this.cartLength = res.length;
       });
+  }
+
+  showChatBox(message) {
+    this.showChat = true;
+    this.receiverId = message.receiverId;
+    this.senderId = message.senderId;
   }
 
   openLoginDialog():void {

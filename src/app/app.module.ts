@@ -14,6 +14,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductComponent } from './product/product.component';
 import { CartComponent } from './cart/cart.component';
 import { RegisterComponent } from './register/register.component';
+import { ChatComponent } from './chat/chat.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatBadgeModule} from '@angular/material/badge';
+
+
 // import {AppConfig} from '../config/config';
 
 
@@ -25,7 +32,8 @@ import { RegisterComponent } from './register/register.component';
     LoginComponent,
     ProductComponent,
     CartComponent,
-    RegisterComponent
+    RegisterComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +46,10 @@ import { RegisterComponent } from './register/register.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatButtonModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatMenuModule,
+    MatBadgeModule,
     // AppConfig,
     GrowlModule.forRoot({ maxMessages: 1, displayTimeMs: 5000 }),
   ],

@@ -10,12 +10,15 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class ProductComponent implements OnInit {
 productFormData: FormGroup;
+
   constructor( public dialogRef: MatDialogRef<ProductComponent>,
     @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder, private authService:AuthenticationService) {
+    
    }
 
    ngOnInit() {
      this.initializeForm();
+     
    }
 
    initializeForm() {
@@ -26,11 +29,10 @@ productFormData: FormGroup;
    }
 
    addProduct() {
-     const productInfo = {
-       name: this.productFormData.value.name,
-       amount: this.productFormData.value.amount
-     }
-     this.authService.addProduct(productInfo).subscribe((response) => {
+     const formData = new FormData();
+     formData.append('name', this.productFormData.value.name);
+     formData.append('amount', this.productFormData.value.amount);    
+     this.authService.addProduct(formData).subscribe((response) => {
        this.close();
      },(error)=> {
      })

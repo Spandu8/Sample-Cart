@@ -1,5 +1,7 @@
-.navbar-nav a{
+.navbar-nav li a{
   cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
 }
 .navbar {
   padding-left: 90px;
@@ -28,3 +30,9 @@
   font-size: 13px;
   text-align: center;
 }
+
+
+.nav-item .mat-button {
+  padding: 3px 16px;
+}
+

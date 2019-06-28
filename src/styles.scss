@@ -31,3 +31,46 @@ mat-dialog-actions{
 ngx-growl{
     z-index: 99999 !important;
 }
+
+
+// notifications styles
+.mat-menu-panel  {
+  width: 270px !important;
+}
+
+.mat-menu-content .mat-menu-item  {
+  line-height: inherit !important;
+  height: inherit !important;
+  border-bottom: 1px solid #ccc !important;
+  padding: 5px 16px !important;
+}
+.mat-menu-content .mat-menu-item:last-child {
+  border-bottom: none !important;
+}
+
+.notifications-row {
+  display: inline;
+}
+
+.notifications-row .fa-comments {
+font-size: 50px;
+float: left;
+}
+
+
+.notifications-row .mesg-section {
+  margin-left: 60px;
+}
+
+.notifications-row .mesg-section p {
+  margin: 0;
+}
+
+.notifications-row .mesg-section .message{
+    font-weight: bold;
+    font-size: 18px;
+} 
+
+.notifications-row .mesg-section .userName{
+  font-size: 12px;
+} 
